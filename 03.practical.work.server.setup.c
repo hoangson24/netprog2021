@@ -4,7 +4,7 @@
 #include<netdb.h>
 #include<string.h>
 #include<stdlib.h>
-# define PORT 8784;
+#define PORT 8784;
 
 int main (int argc, char **argv)
 {
@@ -30,6 +30,10 @@ int main (int argc, char **argv)
     {
         printf("Error binding\n");
         return -1;
+    }
+    else
+    {
+        printf("Binded successful\n");
     }
 
         printf("Loading on port...%d \n", port);
