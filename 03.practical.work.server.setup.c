@@ -17,7 +17,7 @@ int main (int argc, char **argv)
         printf ("Error creating socket\n");
         return -1;
     }
-     else
+    else
     {
         printf("Socket created successful\n");
     }
@@ -33,30 +33,28 @@ int main (int argc, char **argv)
     }
 
         printf("Loading on port...%d \n", port);
-    if (listen(sockfd, 10) < 0) 
-    {
 
     if (listen(sockfd, 5) < 0) 
     {
         printf("Error listening\n");
         return -1;
     }
-     else
+    else
     {
         printf("Listened succcessful\n");
     }
 
     clen=sizeof(caddr);
 
-    if ((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) {
+    if ((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) 
+    {
         printf("Error accepting connection\n");
         return -1;
     }
-     else
-     {
+    else
+    {
         printf("Connected successful\n");
         return 0;
-     }
     }
 }
 
