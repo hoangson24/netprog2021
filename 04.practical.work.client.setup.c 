@@ -10,7 +10,7 @@ int main (int argc, char **argv)
 
 {
     struct hostent *host;
-	    char str[50];
+    char str[50];
 	    
     int connect(int sockfd,const struct sockaddr *saddr,socklen_t addrlen);
     struct sockaddr_in saddr;
