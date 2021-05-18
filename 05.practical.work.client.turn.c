@@ -40,9 +40,9 @@ int main (int argc, char **argv)
     int i=0;
     while (host->h_addr_list[i] != NULL);
     {
-    printf( "%s\n", inet_ntoa( *(struct in_addr*)(host->h_addr_list[i])));
+           printf( "%s\n", inet_ntoa( *(struct in_addr*)(host->h_addr_list[i])));
 		i++;
-    printf("\n");
+           printf("\n");
     }
     }
     
