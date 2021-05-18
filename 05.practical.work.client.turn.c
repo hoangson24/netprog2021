@@ -20,22 +20,22 @@ int main (int argc, char **argv)
     
     if ((sockfd=socket(AF_INET, SOCK_STREAM,0)) <0) 
     { 
-    printf("Error creating socket\n");
-    return -1;
+       printf("Error creating socket\n");
+       return -1;
     }
-    else
+      else
     {
-    printf("Socket created successful\n");
+       printf("Socket created successful\n");
     }
     
     if ((h=gethostbyname("google.com\n")) == NULL)
     {
-    printf("Unknown host\n");
-    return -1;
+       printf("Unknown host\n");
+       return -1;
     }
-    else
+      else
     {
-    struct h_addr_list *address;
+       struct h_addr_list *address;
     
     int i=0;
     while (host->h_addr_list[i] != NULL);
@@ -53,23 +53,23 @@ int main (int argc, char **argv)
     
     if (connect(sockfd, (struct sockaddr *) &saddr,sizeof(saddr)) <0)
     {
-    printf("cannot connect\n");
+       printf("cannot connect\n");
     return -1;
     }
     else
     {
-    printf("Connected successful\n");
+       printf("Connected successful\n");
     }
     
-	while (1) 
-	{
-    char chat[2021];
-    memset(chat, 0, 2021);
-    fgets(chat, 2021, stdin);
-    printf("Client: %s\n", chat);
-    write(sockfd, chat, strlen(chat));
+    while (1) 
+    {
+        char chat[2021];
+        memset(chat, 0, 2021);
+        fgets(chat, 2021, stdin);
+        printf("Client: %s\n", chat);
+        write(sockfd, chat, strlen(chat));
 
-    read(sockfd, chat, 2021);
+        read(sockfd, chat, 2021);
     printf("Server : %s\n", chat);
     }
 }
