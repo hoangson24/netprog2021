@@ -14,12 +14,12 @@ int main (int argc, char **argv)
 
     if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) < 0) 
     {
-        printf ("Error creating socket\n");
-        return -1;
+    printf ("Error creating socket\n");
+    return -1;
     }
     else
     {
-        printf("Socket created successful\n");
+    printf("Socket created successful\n");
     }
     memset(&saddr, 0, sizeof(saddr));
     saddr.sin_family = AF_INET;
@@ -28,40 +28,40 @@ int main (int argc, char **argv)
 
     if ((bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0)) 
     {
-        printf("Error binding\n");
-        return -1;
+    printf("Error binding\n");
+    return -1;
     }
     else
     {
-        printf("Binded successful\n");
+    printf("Binded successful\n");
     }
 
-        printf("Loading on port...%d \n", port);
+    printf("Loading on port...%d \n", port);
 
     if (listen(sockfd, 5) < 0) 
     {
-        printf("Error listening\n");
-        return -1;
+    printf("Error listening\n");
+    return -1;
     }
     else
     {
-        printf("Listened succcessful\n");
+    printf("Listened succcessful\n");
     }
 
     clen=sizeof(caddr);
 
     if ((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) 
     {
-        printf("Error accepting connection\n");
-        return -1;
+    printf("Error accepting connection\n");
+    return -1;
     }
     else
     {
-        printf("Connected successful\n");
-        return 0;
+    printf("Connected successful\n");
+    return 0;
     }
-	while (1) 
-	{
+    while (1) 
+    {
     char chat[2021];
     memset(chat, 0, 2021);
     fgets(chat, 2021, stdin);
@@ -71,8 +71,7 @@ int main (int argc, char **argv)
     read(sockfd, chat, 2021);
     printf("Server : %s\n", chat);
     }
-    
-    int main()
+    while (1)
     {
     char chat[2021];
     char* s;
@@ -83,12 +82,10 @@ int main (int argc, char **argv)
 
     if (s)
     {
-        int i;
-        for (i = 0; *(s + i); i++)
-        {
-            printf("message=[%s]\n", *(s + i));
-        }
-        printf("\n");
+    int i;
+    for (i = 0; *(s + i); i++)
+    printf("Client message=[%s]\n", *(s + i));
+    printf("\n");
     }
 
     return 0;
