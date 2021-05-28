@@ -20,29 +20,29 @@ int main (int argc, char **argv)
     
     if ((sockfd=socket(AF_INET, SOCK_STREAM,0)) <0) 
     { 
-       printf("Error creating socket\n");
-       return -1;
+    printf("Error creating socket\n");
+    return -1;
     }
-      else
+    else
     {
-       printf("Socket created successful\n");
+    printf("Socket created successful\n");
     }
     
     if ((h=gethostbyname("google.com\n")) == NULL)
     {
-       printf("Unknown host\n");
-       return -1;
+    printf("Unknown host\n");
+    return -1;
     }
-      else
+    else
     {
-       struct h_addr_list *address;
+    struct h_addr_list *address;
     
     int i=0;
     while (host->h_addr_list[i] != NULL);
     {
-           printf( "%s\n", inet_ntoa( *(struct in_addr*)(host->h_addr_list[i])));
-		i++;
-           printf("\n");
+    printf( "%s\n", inet_ntoa( *(struct in_addr*)(host->h_addr_list[i])));
+	i++;
+    printf("\n");
     }
     }
     
@@ -53,16 +53,16 @@ int main (int argc, char **argv)
     
     if (connect(sockfd, (struct sockaddr *) &saddr,sizeof(saddr)) <0)
     {
-       printf("cannot connect\n");
+    printf("cannot connect\n");
     return -1;
     }
     else
     {
-       printf("Connected successful\n");
+    printf("Connected successful\n");
     }
     int fl = fcntl(sockfd, F_GETFL, 0);
-        fl |= SOCK_NONBLOCK;
-        fcntl(sockfd, F_SETFL, fl);
+    fl |= SOCK_NONBLOCK;
+    fcntl(sockfd, F_SETFL, fl);
     printf("Server connected successful\n");
     
     while (1) 
