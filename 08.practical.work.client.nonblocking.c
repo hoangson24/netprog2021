@@ -7,58 +7,58 @@
 #define PORT 8784;
 
 int main (int argc, char **argv)
+
 {
-    int sockfd, clen, clientfd;
-    struct sockaddr_in saddr, caddr;
-    short port = 8784;
-
-    if ((sockfd=socket(AF_INET, SOCK_STREAM, 0)) < 0) 
-    {
-    printf ("Error creating socket\n");
-    return -1;
+    struct hostent *host;
+    char str[50];
+	    
+    int connect(int sockfd,const struct sockaddr *saddr,socklen_t addrlen);
+    struct sockaddr_in saddr;
+    struct hostent *h;
+    int sockfd;
+    unsigned short port = 8784;
+    
+    if ((sockfd=socket(AF_INET, SOCK_STREAM,0)) <0) 
+    { 
+       printf("Error creating socket\n");
+       return -1;
     }
-    else
+      else
     {
-    printf("Socket created successful\n");
+       printf("Socket created successful\n");
     }
-    memset(&saddr, 0, sizeof(saddr));
+    
+    if ((h=gethostbyname("google.com\n")) == NULL)
+    {
+       printf("Unknown host\n");
+       return -1;
+    }
+      else
+    {
+       struct h_addr_list *address;
+    
+    int i=0;
+    while (host->h_addr_list[i] != NULL);
+    {
+           printf( "%s\n", inet_ntoa( *(struct in_addr*)(host->h_addr_list[i])));
+		i++;
+           printf("\n");
+    }
+    }
+    
+    memset(&saddr, 0,sizeof(saddr));
     saddr.sin_family = AF_INET;
-    saddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    memcpy((char*) &saddr.sin_addr.s_addr, host->h_addr_list[0], h->h_length);
     saddr.sin_port = htons(port);
-
-    if ((bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0)) 
+    
+    if (connect(sockfd, (struct sockaddr *) &saddr,sizeof(saddr)) <0)
     {
-    printf("Error binding\n");
+       printf("cannot connect\n");
     return -1;
     }
     else
     {
-    printf("Binded successful\n");
-    }
-
-    printf("Loading on port...%d \n", port);
-
-    if (listen(sockfd, 5) < 0) 
-    {
-    printf("Error listening\n");
-    return -1;
-    }
-    else
-    {
-    printf("Listened succcessful\n");
-    }
-
-    clen=sizeof(caddr);
-
-    if ((clientfd=accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) 
-    {
-    printf("Error accepting connection\n");
-    return -1;
-    }
-    else
-    {
-    printf("Connected successful\n");
-    return 0;
+       printf("Connected successful\n");
     }
     int fl = fcntl(sockfd, F_GETFL, 0);
         fl |= SOCK_NONBLOCK;
@@ -69,11 +69,8 @@ int main (int argc, char **argv)
     {
     char chat[2021];
     memset(chat, 0, 2021);
-    fgets(chat, 2021, stdin);
-    printf("Client: %s\n", chat);
-    write(sockfd, chat, strlen(chat));
-
-    read(sockfd, chat, 2021);
+    if (read(sockfd, chat, 2021) > 0) 
+    {
     printf("Server : %s\n", chat);
     }
     struct pollfd input[2021] = {{.fd = 0, .events = POLLIN}};
@@ -83,6 +80,7 @@ int main (int argc, char **argv)
     chat[strlen(chat) - 1] = 0;
     write(sockfd, chat, strlen(chat));
     }
+    
     while (1)
     {
     char chat[2021];
@@ -99,15 +97,14 @@ int main (int argc, char **argv)
     printf("Client message=[%s]\n", *(s + i));
     printf("\n");
     }
-
-    return 0;
+    return -1;
     }
-    
+
 int shutdown(int sockfd, int how);
     char chat[2021];
     if (strncmp("Disconnect", chat, 2021) == 0);
 	{
-	printf("Server stopped\n");
+	printf("Client stopped\n");
 	shutdown(sockfd, 2021);
 	exit(0);
 	}
@@ -115,9 +112,10 @@ int shutdown(int sockfd, int how);
 	
 	if (strncmp("Close", chat, 2021) == 0);
 	{
-	printf("Server closed\n");	
+	printf("Client closed\n");	
 	close(sockfd);
 	exit(0);
 	}
 	return 0;
+}
 }
