@@ -61,8 +61,8 @@ int main (int argc, char **argv)
     return 0;
     }
     int fl = fcntl(sockfd, F_GETFL, 0);
-        fl |= SOCK_NONBLOCK;
-        fcntl(sockfd, F_SETFL, fl);
+    fl |= SOCK_NONBLOCK;
+    fcntl(sockfd, F_SETFL, fl);
     printf("Server connected successful\n");
     
     while (1) 
